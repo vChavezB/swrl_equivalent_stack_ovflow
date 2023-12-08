@@ -1,0 +1,235 @@
+@prefix : <http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#> .
+
+<http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#AE_of
+:AE_of rdf:type owl:ObjectProperty ;
+       owl:inverseOf :hasAE .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#hasAE
+:hasAE rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#hasAO
+:hasAO rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#hasMakeOwlThing
+:hasMakeOwlThing rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#hasProfile
+:hasProfile rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#unitCodeFrom
+:unitCodeFrom rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#isProcessData
+:isProcessData rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#AE
+:AE rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#AO
+:AO rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#DeviceDescription
+:DeviceDescription rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#DeviceProfile
+:DeviceProfile rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#MakeOwlThingIndiv
+:MakeOwlThingIndiv rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#ProcessData
+:ProcessData rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty :isProcessData ;
+                                   owl:hasValue "true"^^xsd:boolean
+                                 ] .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#ProcessDataInput
+:ProcessDataInput rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasAE ;
+                                        owl:hasValue :Vel
+                                      ] ;
+                  rdfs:subClassOf :ProcessData .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#Device1
+:Device1 rdf:type owl:NamedIndividual ,
+                  :DeviceDescription ;
+         :hasProfile :EncoderProfile .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#EncAO1
+:EncAO1 rdf:type owl:NamedIndividual ,
+                 :AO ;
+        :hasAE :Temp ,
+               :Vel ;
+        :isProcessData "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#EncUnitAO
+:EncUnitAO rdf:type owl:NamedIndividual ,
+                    :AO ;
+           :hasAE :unit_ae_1 .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#EncoderProfile
+:EncoderProfile rdf:type owl:NamedIndividual ,
+                         :DeviceProfile ;
+                :hasAO :EncAO1 .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#Temp
+:Temp rdf:type owl:NamedIndividual ,
+               :AE .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#Vel
+:Vel rdf:type owl:NamedIndividual ,
+              :AE ;
+     :unitCodeFrom :unit_ae_1 .
+
+
+###  http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-330#unit_ae_1
+:unit_ae_1 rdf:type owl:NamedIndividual ,
+                    :AE .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:ao rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:ae rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:new_indiv rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Manual assertion of the same rule I set in Protege editor \"Equivalent\" for ProcessDataInput" ;
+   rdfs:label "S1" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :AO ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :ao
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasAE ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :ao ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :Vel
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :isProcessData ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :ao ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :ProcessDataInput ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :ao
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S2" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasAE ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :ao ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :ae
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#builtin> <http://swrl.stanford.edu/ontologies/built-ins/3.3/swrlx.owl#makeOWLThing> ;
+                                                                  <http://www.w3.org/2003/11/swrl#arguments> ( :new_indiv
+                                                                                                               :ao
+                                                                                                             )
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :ProcessDataInput ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :ao
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :AO ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :ao
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :MakeOwlThingIndiv ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :new_indiv
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMakeOwlThing ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :ao ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :new_indiv
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.26.2023-11-26T01:45:50Z) https://github.com/owlcs/owlapi
